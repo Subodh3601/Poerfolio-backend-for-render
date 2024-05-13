@@ -2,7 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 const port = 3600;
 
@@ -15,14 +17,14 @@ app.post('/sendEmail', async(req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'subsin360@gmail.com',
-            pass:'vqsu frei pwpi pinv'
+            user: process.env.USER_NAME,
+            pass: process.env.PASSWORD
         }
     })
 
     const mailOptions = {
-        from: 'subsin360@gmail.com ',
-        to: 'subodhsingh360@gmail.com',
+        from: process.env.USER_NAME,
+        to: process.env.TO,
         subject: 'message from E-RESUME',
         text: `Name: ${name}\nEmail: ${email}\nMobile: ${phone}\nMessage: ${msg}`
     };
